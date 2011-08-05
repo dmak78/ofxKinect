@@ -67,6 +67,13 @@ class ofxKinect : public ofxBase3DVideo, protected ofxThread{
 		/// get the pixels of the most recent rgb frame
 		unsigned char	* getPixels();
 		
+		#if ( OF_VERSION >= 7 )
+			ofPixelsRef getPixelsRef(){
+				ofLogError( "getPixelsRef not properly implemented!" );
+				return pixels;
+			}
+		#endif 
+		
 		/// get the pixels of the most recent depth frame
 		unsigned char 	* getDepthPixels();		// grey scale values
 		unsigned short	* getRawDepthPixels();	// raw 11 bit values
@@ -120,6 +127,10 @@ class ofxKinect : public ofxBase3DVideo, protected ofxThread{
 		
 		unsigned char *			videoPixels;
 		unsigned short *		depthPixelsRaw;
+		
+		#if ( OF_VERSION >= 7 )
+			ofPixels pixels;
+		#endif 
 		
 		ofPoint rawAccel;
 		ofPoint mksAccel;
